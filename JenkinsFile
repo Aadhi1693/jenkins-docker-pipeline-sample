@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '🏗️ Building the project...'
+                echo ' Hi Myself Preethi Rangaraj'
                 // Example build command
                 sh 'echo Build stage'
             }
