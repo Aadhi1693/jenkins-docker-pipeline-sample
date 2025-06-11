@@ -4,21 +4,24 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo '🏗️ Building the project...'
-                echo ' Hi Myself Preethi Rangaraj'
-                // Example build command
-                sh 'echo Build stage'
+                echo '🔨 Building Docker Image...'
+                sh 'docker build -t sample-app .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '🧪 Running Tests...'
+                sh './test.sh'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo '🚀 Deploying the project...'
-                // Example deployment step
-                sh 'echo Deployment stage'
+                echo '🚀 Deploying Container...'
+                sh 'docker rm -f sample-app || true'
+                sh 'docker run -d -p 8081:80 --name sample-app sample-app'
             }
         }
     }
 }
-
-
