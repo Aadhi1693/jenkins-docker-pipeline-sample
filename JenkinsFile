@@ -2,22 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
+        stage('Build') {
             steps {
-                git credentialsId: 'github-token', url: 'https://github.com/Aadhi1693/jenkins-docker-pipeline-sample.git'
+                echo '🏗️ Building the project...'
+                // Example build command
+                sh 'echo Build stage'
+            }
+        }
 
-            }
-        }
-        stage('Build Docker Image') {
+        stage('Deploy') {
             steps {
-                sh 'docker build -t jenkins-demo .'
-            }
-        }
-        stage('Run Container') {
-            steps {
-                sh 'docker run -d -p 8080:80 --name jenkins-demo-container jenkins-demo || true'
+                echo '🚀 Deploying the project...'
+                // Example deployment step
+                sh 'echo Deployment stage'
             }
         }
     }
 }
+
 
