@@ -1,41 +1,25 @@
-pipeline {
-    agent any
+pipeline  { 
+	agent any  
 
-    stages {
-        stage('Build') {
-            steps {
-
-                echo '🔨 Building Docker Image...'
-                sh 'docker build -t sample-app .'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo '🧪 Running Tests...'
-                sh './test.sh'
-
-                echo '🏗️ Building the project...'
-                
-                // Example build command
-                sh 'echo Build stage'
-            }
-        }
-        
-        stage('Test') {
-           steps { 
-		echo ' Testing the project..'
-		// Example Test Stage
-		sh 'echo test stage'
-		
+stage('Build') {
+		steps {
+			echo ' Building a project....'
+			sh 'echo Building stage'
 		}
 	}
-        stage('Deploy') {
-            steps {
-                echo '🚀 Deploying Container...'
-                sh 'docker rm -f sample-app || true'
-                sh 'docker run -d -p 8081:80 --name sample-app sample-app'
-            }
-        }
-    }
+
+stage('Test') {
+		steps {
+			echo ' Testing the project...'
+			sh 'echo Testing stage'
+		}
+	}
+
+stage('Deploy') {
+		steps {
+			echo 'Deploying the project..'
+			sh 'echo Deployment stage'
+		}
+	}
+}
 }
