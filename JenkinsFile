@@ -4,24 +4,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                sh 'echo Building stage'
+                echo 'Building Docker image...'
+                sh 'docker build -t myapp .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the project...'
-                sh 'echo Testing stage'
+                echo 'Running container test...'
+                sh 'docker images'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
-                sh 'echo Deployment stage'
+                echo 'Deploying container...'
+                sh 'docker rm -f $(docker ps -q --filter ancestor=myapp) || true'
+                sh 'docker run -d -p 8081:80 myapp'
             }
         }
     }
 }
+
 
